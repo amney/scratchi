@@ -1,0 +1,15 @@
+{
+  "title": "aic Blocks",
+  "descriptor": {
+    "en": {
+      "blocks": [
+        [" ", "alert %n", "alert", "Hello!"]
+      ]
+    },
+    "ja": {
+      "blocks": [
+        [" ", "%n とアラートを出す", "alert", "こんにちは!"]
+      ]
+    }
+  }
+}
