@@ -1,15 +1,26 @@
-{
-  "title": "aic Blocks",
-  "descriptor": {
-    "en": {
-      "blocks": [
-        [" ", "alert %n", "alert", "Hello!"]
-      ]
-    },
-    "ja": {
-      "blocks": [
-        [" ", "%n とアラートを出す", "alert", "こんにちは!"]
-      ]
-    }
-  }
+ {
+		"blocks": [
+			[ " ", "Reregister plugin from URL %s", "reregister", "https://" ],
+
+			[ " ", "Connect to APIC %s with username %s and password %s over %m.protocol", "connect", "127.0.0.1", "admin", "password", "http" ],
+
+			[ " ", "Create mo variable named %s with data %s", "saveMo", "variable", "" ],
+			[ " ", "Create list named %s with data %s", "saveClass", "list", "" ],
+
+			[ "r", "Get class from class list %s", "getClass", "key" ],
+			[ "r", "Get mo at index %n from class list %s", "getMo", 0, "cls" ],
+
+			[ "r", "Get mo %n from variables", "getVariable", "variable" ],
+			[ "r", "Get attribute %s from mo %s", "getAttribute", "attribute", "" ],
+
+			[ "R", "Fetch managed object variable %s by dn", "getByDn", "uni/" ],
+			[ "R", "Fetch managed object list by class %s", "getByClass", "fvTenant" ]
+		], 
+		"menus": {
+			"protocol": [
+				"http",
+				"https"
+			]
+		}
 }
+
