@@ -6,15 +6,25 @@ var source = require('vinyl-source-stream');
 var ngrok = require('ngrok');
 var browserify = require('browserify');
 
-gulp.task('js', function() {
-  browserify({entries: ['src/index.js']})
+
+gulp.task('js', function (){
+  browserify({
+    entries: [
+      'src/index.js'
+    ]
+  })
+    .transform("babelify", {
+      presets: [
+        'es2015'
+      ]
+    })
     .bundle()
     .pipe(source('scripts.js'))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('webserver', function() {
-  ngrok.connect(8000, function(err, url) {
+gulp.task('webserver', function (){
+  ngrok.connect(8000, function (err, url){
     if(err) {
       gutil.log('Error! Please register ngrok.com or check a config file.', err);
       return;
@@ -33,6 +43,11 @@ gulp.task('webserver', function() {
 
 // Task for `gulp` command
 
-gulp.task('default',['js', 'webserver'], function() {
-    gulp.watch('src/*',['js']);
+gulp.task('default', [
+  'js',
+  'webserver'
+], function (){
+  gulp.watch('src/*', [
+    'js'
+  ]);
 });
