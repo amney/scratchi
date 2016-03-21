@@ -8,6 +8,7 @@
 			[ " ", "Create list named %s with data %s", "saveClass", "list", "" ],
 
 			[ "r", "Get class from class list %s", "getClass", "key" ],
+			[ "r", "Get list length  from class list %s", "getClass", "key" ],
 			[ "r", "Get mo at index %n from class list %s", "getMo", 0, "cls" ],
 
 			[ "r", "Get mo %n from variables", "getVariable", "variable" ],

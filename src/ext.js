@@ -94,6 +94,13 @@ class Scratchi {
     return value
   }
 
+  getClassLength(key){
+    console.log("getting class", key)
+    let value = this.class_cache[ key ].length;
+    console.log("length", value)
+    return value
+  }
+
   getMo(index, cls){
     let value = cls[ index ];
     console.log(value)

@@ -9853,6 +9853,7 @@ module.exports= {
 			[ " ", "Create list named %s with data %s", "saveClass", "list", "" ],
 
 			[ "r", "Get class from class list %s", "getClass", "key" ],
+			[ "r", "Get list length  from class list %s", "getClass", "key" ],
 			[ "r", "Get mo at index %n from class list %s", "getMo", 0, "cls" ],
 
 			[ "r", "Get mo %n from variables", "getVariable", "variable" ],
@@ -9986,6 +9987,14 @@ var Scratchi = function () {
       console.log("getting class", key);
       var value = this.class_cache[key];
       console.log(value);
+      return value;
+    }
+  }, {
+    key: "getClassLength",
+    value: function getClassLength(key) {
+      console.log("getting class", key);
+      var value = this.class_cache[key].length;
+      console.log("length", value);
       return value;
     }
   }, {
