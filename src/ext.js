@@ -27,6 +27,10 @@ class Scratchi {
     this.descriptor = require('./data.json')
   }
 
+  scratchiInstalled(){
+    return true
+  }
+
   reregister(url){
     console.log('reregistering')
     ScratchExtensions.unregister(this.title)

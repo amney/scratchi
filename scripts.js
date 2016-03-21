@@ -9845,6 +9845,7 @@ return jQuery;
 },{}],2:[function(require,module,exports){
 module.exports= {
 		"blocks": [
+			[ "r", "Is Scratchi installed?", "scratchiInstalled"],
 			[ " ", "Reregister plugin from URL %s", "reregister", "https://" ],
 
 			[ " ", "Connect to APIC %s with username %s and password %s over %m.protocol", "connect", "127.0.0.1", "admin", "password", "http" ],
@@ -9918,6 +9919,11 @@ var Scratchi = function () {
   }
 
   _createClass(Scratchi, [{
+    key: "scratchiInstalled",
+    value: function scratchiInstalled() {
+      return true;
+    }
+  }, {
     key: "reregister",
     value: function reregister(url) {
       console.log('reregistering');
