@@ -9885,8 +9885,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// Block entry points
-
 var Scratchi = function () {
   _createClass(Scratchi, [{
     key: "_shutdown",

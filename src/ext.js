@@ -1,7 +1,5 @@
 import $ from 'jquery';
 
-
-// Block entry points
 class Scratchi {
   _shutdown(){
     console.log("Shutting down")
