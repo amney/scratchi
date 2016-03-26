@@ -9850,18 +9850,15 @@ module.exports= {
 
 			[ " ", "Connect to APIC %s with username %s and password %s over %m.protocol", "connect", "127.0.0.1", "admin", "password", "http" ],
 
-			[ " ", "Create mo variable named %s with data %s", "saveMo", "variable", "" ],
-			[ " ", "Create list named %s with data %s", "saveClass", "list", "" ],
+			[ " ", "Create list named %s with items %s", "saveClass", "", "" ],
 
-			[ "r", "Get class from class list %s", "getClass", "key" ],
-			[ "r", "Get list length  from class list %s", "getClass", "key" ],
-			[ "r", "Get mo at index %n from class list %s", "getMo", 0, "cls" ],
+			[ "r", "Get length of list %s", "getListLength", "" ],
+			[ "r", "Get item at index %n from list %s", "getMoFromList", 0, "" ],
+			[ "r", "Get attribute %s from item %s", "getAttribute", "", "" ],
 
-			[ "r", "Get mo %n from variables", "getVariable", "variable" ],
-			[ "r", "Get attribute %s from mo %s", "getAttribute", "attribute", "" ],
-
-			[ "R", "Fetch managed object variable %s by dn", "getByDn", "uni/" ],
-			[ "R", "Fetch managed object list by class %s", "getByClass", "fvTenant" ]
+			[ "R", "Fetch item %s from APIC", "getByDn", "uni/" ],
+			[ "R", "Fetch items %s from APIC", "getByClass", "" ],
+			[ "R", "Fetch items %s with filter %s from APIC", "getByClassWithFilter", "", "and" ]
 		], 
 		"menus": {
 			"protocol": [
@@ -9884,8 +9881,6 @@ var _jquery2 = _interopRequireDefault(_jquery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// Block entry points
 
 var Scratchi = function () {
   _createClass(Scratchi, [{
@@ -9910,7 +9905,6 @@ var Scratchi = function () {
     this.apic = '';
     this.protocol = '';
     this.baseUrl = '';
-    this.mo_cache = {};
     this.class_cache = {};
 
     this.title = "ACI Extension";
@@ -9981,13 +9975,6 @@ var Scratchi = function () {
       return true;
     }
   }, {
-    key: "saveMo",
-    value: function saveMo(key, value) {
-      console.log('Saving mo', key, value);
-      this.mo_cache[key] = value;
-      return true;
-    }
-  }, {
     key: "getClass",
     value: function getClass(key) {
       console.log("getting class", key);
@@ -9998,22 +9985,17 @@ var Scratchi = function () {
   }, {
     key: "getClassLength",
     value: function getClassLength(key) {
-      console.log("getting class", key);
-      var value = this.class_cache[key].length;
+      console.log("getting class length", key);
+      var value = this.getClass(key).length;
       console.log("length", value);
       return value;
     }
   }, {
-    key: "getMo",
-    value: function getMo(index, cls) {
-      var value = cls[index];
-      console.log(value);
-      return value;
-    }
-  }, {
-    key: "getVariable",
-    value: function getVariable(key) {
-      var value = this.mo_cache[key];
+    key: "getMoFromList",
+    value: function getMoFromList(index, cls) {
+      console.log('Getting MO from list', index, cls);
+      var list = this.getClass(cls);
+      var value = list[index];
       console.log(value);
       return value;
     }
@@ -10057,8 +10039,13 @@ var Scratchi = function () {
         url: url,
         type: "GET",
         dataType: "json",
-        success: function success(object) {
-          callback(object.imdata);
+        success: function success(objects) {
+          var cleanedObjects = objects.imdata.map(function (object) {
+            var key = Object.keys(object)[0];
+            var attributes = object[key].attributes;
+            return attributes;
+          });
+          callback(cleanedObjects);
         },
         error: function error() {
           return callback([{
@@ -10066,6 +10053,11 @@ var Scratchi = function () {
           }]);
         }
       });
+    }
+  }, {
+    key: "getByClassWithFilter",
+    value: function getByClassWithFilter(cls, filter, callback) {
+      return null;
     }
   }]);
 
