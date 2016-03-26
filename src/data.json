@@ -5,18 +5,15 @@
 
 			[ " ", "Connect to APIC %s with username %s and password %s over %m.protocol", "connect", "127.0.0.1", "admin", "password", "http" ],
 
-			[ " ", "Create mo variable named %s with data %s", "saveMo", "variable", "" ],
-			[ " ", "Create list named %s with data %s", "saveClass", "list", "" ],
+			[ " ", "Create list named %s with items %s", "saveClass", "", "" ],
 
-			[ "r", "Get class from class list %s", "getClass", "key" ],
-			[ "r", "Get list length  from class list %s", "getClass", "key" ],
-			[ "r", "Get mo at index %n from class list %s", "getMo", 0, "cls" ],
+			[ "r", "Get length of list %s", "getListLength", "" ],
+			[ "r", "Get item at index %n from list %s", "getMoFromList", 0, "" ],
+			[ "r", "Get attribute %s from item %s", "getAttribute", "", "" ],
 
-			[ "r", "Get mo %n from variables", "getVariable", "variable" ],
-			[ "r", "Get attribute %s from mo %s", "getAttribute", "attribute", "" ],
-
-			[ "R", "Fetch managed object variable %s by dn", "getByDn", "uni/" ],
-			[ "R", "Fetch managed object list by class %s", "getByClass", "fvTenant" ]
+			[ "R", "Fetch item %s from APIC", "getByDn", "uni/" ],
+			[ "R", "Fetch items %s from APIC", "getByClass", "" ],
+			[ "R", "Fetch items %s with filter %s from APIC", "getByClassWithFilter", "", "and" ]
 		], 
 		"menus": {
 			"protocol": [

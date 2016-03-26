@@ -17,7 +17,6 @@ class Scratchi {
     this.apic = '';
     this.protocol = '';
     this.baseUrl = '';
-    this.mo_cache = {};
     this.class_cache = {};
 
     this.title = "ACI Extension";
@@ -83,11 +82,6 @@ class Scratchi {
     this.class_cache[ key ] = value;
     return true
   }
-  saveMo(key, value){
-    console.log('Saving mo', key, value)
-    this.mo_cache[ key ] = value;
-    return true
-  }
 
   getClass(key){
     console.log("getting class", key)
@@ -97,20 +91,16 @@ class Scratchi {
   }
 
   getClassLength(key){
-    console.log("getting class", key)
-    let value = this.class_cache[ key ].length;
+    console.log("getting class length", key)
+    let value = this.getClass(key).length;
     console.log("length", value)
     return value
   }
 
-  getMo(index, cls){
-    let value = cls[ index ];
-    console.log(value)
-    return value
-  }
-
-  getVariable(key){
-    let value = this.mo_cache[ key ];
+  getMoFromList(index, cls){
+    console.log('Getting MO from list', index, cls)
+    let list = this.getClass(cls)
+    let value = list[ index ];
     console.log(value)
     return value
   }
@@ -148,8 +138,13 @@ class Scratchi {
       url: url,
       type: "GET",
       dataType: "json",
-      success: (object) => {
-        callback(object.imdata)
+      success: (objects) => {
+        let cleanedObjects = objects.imdata.map((object) => {
+          let key = Object.keys(object)[ 0 ];
+          let attributes = object[ key ].attributes;
+          return attributes
+        })
+        callback(cleanedObjects)
       },
       error: () => callback([
           {
@@ -157,6 +152,9 @@ class Scratchi {
           }
         ])
     })
+  }
+  getByClassWithFilter(cls, filter, callback){
+    return null
   }
 }
 
